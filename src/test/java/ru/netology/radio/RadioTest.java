@@ -77,9 +77,35 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldReduceVolume2() {       // тест понижения значения громкости (на единицу)
+        Radio radio = new Radio();
+        radio.setCurrentVolume(0);
+
+        radio.reduceVolume();
+
+        int expected = 0;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldIncreaceVolume() {      // тест повышения значения громкости (на единицу)
         Radio radio = new Radio();
         radio.setCurrentVolume(99);
+
+        radio.increaseVolume();
+
+        int expected = 100;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIncreaceVolume2() {      // тест повышения значения громкости (на единицу)
+        Radio radio = new Radio();
+        radio.setCurrentVolume(100);
 
         radio.increaseVolume();
 
@@ -162,6 +188,19 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldReduceStation2() {       // тест переключения радиостанции (уменьшение на единицу)
+        Radio radio = new Radio();
+        radio.setCurrentStation(9);
+
+        radio.reduceStation();
+
+        int expected = 8;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldIncreaceStation() {      // тест переключения радиостанции (увеличение на единицу)
         Radio radio = new Radio();
         radio.setCurrentStation(9);
@@ -169,6 +208,19 @@ public class RadioTest {
         radio.increaceStation();
 
         int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIncreaceStation2() {     // тест переключения радиостанции (увеличение на единицу)
+        Radio radio = new Radio();
+        radio.setCurrentStation(0);
+
+        radio.increaceStation();
+
+        int expected = 1;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
