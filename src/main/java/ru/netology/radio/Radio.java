@@ -3,7 +3,7 @@ package ru.netology.radio;
 public class Radio {
     // НАСТРОЙКА ЗВУКА!!!
 
-    public int currentVolume;          // текущий показатель громкости
+    private int currentVolume;          // текущий показатель громкости
 
     public int getCurrentVolume() {    // запрос текущей громкости
 
@@ -45,7 +45,7 @@ public class Radio {
 
     // НАСТРОЙКА РАДИОСТАНЦИЙ!!!
 
-    public int currentStation;          // текущая радиостанция
+    private int currentStation;          // текущая радиостанция
 
     public int getCurrentStation() {    // запрос текущей радиостанции
         return currentStation;
