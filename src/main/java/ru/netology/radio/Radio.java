@@ -5,6 +5,7 @@ public class Radio {
 
     private int currentVolume;          // текущий показатель громкости
 
+
     public int getCurrentVolume() {    // запрос текущей громкости
 
         return currentVolume;
@@ -45,18 +46,37 @@ public class Radio {
 
     // НАСТРОЙКА РАДИОСТАНЦИЙ!!!
 
-    private int currentStation;          // текущая радиостанция
+
+    private int maxStation = 9;
+    private int minStation = 0;
+    private int currentStation = maxStation;          // текущая радиостанция
+    private int totalStation = 10;
+
 
     public int getCurrentStation() {    // запрос текущей радиостанции
         return currentStation;
     }
 
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
+
+    public Radio(int totalStation) {
+        this.totalStation = totalStation;
+
+    }
+
+
     public void setMaxStation() {       // максимальная радиостанция (значение)
-        currentStation = 9;
+        currentStation = maxStation;
     }
 
     public void setMinStation() {       // минимальная радиостанция (значение)
-        currentStation = 0;
+        currentStation = minStation;
     }
 
     public void setCurrentStation(int newCurrentStation) {   // настройка условий (значений)
