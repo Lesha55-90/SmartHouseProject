@@ -5,7 +5,6 @@ public class Radio {
 
     private int currentVolume;          // текущий показатель громкости
 
-
     public int getCurrentVolume() {    // запрос текущей громкости
 
         return currentVolume;
@@ -46,47 +45,55 @@ public class Radio {
 
     // НАСТРОЙКА РАДИОСТАНЦИЙ!!!
 
+    private int currentStation;          // текущая радиостанция
+    private int maxStation;
 
-    private int maxStation = 9;
-    private int minStation = 0;
-    private int currentStation = maxStation;          // текущая радиостанция
-    private int totalStation = 10;
+    public Radio() {
+        this.maxStation = 9;
 
+    }
+
+    public Radio(int stationCount) {
+        this.maxStation = stationCount - 1;
+
+    }
+
+    public void next() {
+        if (currentStation != maxStation) {
+            currentStation++;
+        } else {
+            currentStation = 0;
+        }
+    }
+
+    public void prev() {
+        if (currentStation != 0) {
+            currentStation--;
+        } else {
+            currentStation = maxStation;
+        }
+    }
 
     public int getCurrentStation() {    // запрос текущей радиостанции
         return currentStation;
     }
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-    public Radio(int totalStation) {
-        this.totalStation = totalStation;
-
-    }
-
 
     public void setMaxStation() {       // максимальная радиостанция (значение)
         currentStation = maxStation;
     }
 
     public void setMinStation() {       // минимальная радиостанция (значение)
-        currentStation = minStation;
+        currentStation = 0;
     }
 
-    public void setCurrentStation(int newCurrentStation) {   // настройка условий (значений)
-        if (newCurrentStation > 9) {
+    public void setCurrentStation(int currentStation) {   // настройка условий (значений)
+        if (currentStation > maxStation) {
             return;
         }
-        if (newCurrentStation < 0) {
+        if (currentStation < 0) {
             return;
         }
-        currentStation = newCurrentStation;
+        this.currentStation = currentStation;
     }
 
     public void reduceStation() {        // переключения радиостанции (уменьшение на единицу)
@@ -98,7 +105,7 @@ public class Radio {
     }
 
     public void increaceStation() {       // переключения радиостанции (увеличение на единицу)
-        if (currentStation < 9) {
+        if (currentStation < maxStation) {
             currentStation = currentStation + 1;
         } else {
             setMinStation();

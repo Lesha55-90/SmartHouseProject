@@ -9,7 +9,7 @@ public class RadioTest {
 
     @Test
     public void shouldVolume() {           // тест текущей громкости
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
 
         radio.setCurrentVolume(50);
 
@@ -21,7 +21,7 @@ public class RadioTest {
 
     @Test
     public void shouldSetMinVolume() {      // тест минимальной громкости
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setMinVolume();
 
         int expected = 0;
@@ -32,7 +32,7 @@ public class RadioTest {
 
     @Test
     public void shouldSetMaxVolume() {       // тест максимальной громкости
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setMaxVolume();
 
         int expected = 100;
@@ -43,7 +43,7 @@ public class RadioTest {
 
     @Test
     public void shouldSetHiMaxVolume() {     // тест установки значения громксоти выше max значения
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(101);
 
         int expected = 0;
@@ -54,7 +54,7 @@ public class RadioTest {
 
     @Test
     public void shouldSetLowMinVolume() {    // тест установки значения громксоти ниже min значения
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(-1);
 
         int expected = 0;
@@ -65,7 +65,7 @@ public class RadioTest {
 
     @Test
     public void shouldReduceVolume() {       // тест понижения значения громкости (на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(1);
 
         radio.reduceVolume();
@@ -78,7 +78,7 @@ public class RadioTest {
 
     @Test
     public void shouldReduceVolume2() {       // тест понижения значения громкости (на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(0);
 
         radio.reduceVolume();
@@ -91,7 +91,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaceVolume() {      // тест повышения значения громкости (на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(99);
 
         radio.increaseVolume();
@@ -104,7 +104,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaceVolume2() {      // тест повышения значения громкости (на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(100);
 
         radio.increaseVolume();
@@ -119,15 +119,123 @@ public class RadioTest {
     // ТЕСТЫ   РАДИОСТАНЦИИ
 
     @Test
-    public void test () {
-        Radio radio = new Radio(10);
+    public void test() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(9);
 
-        Assertions.assertEquals(9,radio.getMaxStation());
+        radio.next();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
+    public void test1() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(8);
+
+        radio.next();
+
+        int expected = 9;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test2() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(0);
+
+        radio.next();
+
+        int expected = 1;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test3() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(1);
+
+        radio.next();
+
+        int expected = 2;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test4() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(0);
+
+        radio.prev();
+
+        int expected = 9;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test5() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(1);
+
+        radio.prev();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test6() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(2);
+
+        radio.prev();
+
+        int expected = 1;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test7() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(9);
+
+        radio.prev();
+
+        int expected = 8;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCount() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(29);
+
+        int expected = 29;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+    @Test
     public void shouldStation() {             // тест текущей радиостанции
-        Radio radio = new Radio(5);
+        Radio radio = new Radio();
 
         radio.setCurrentStation(5);
 
@@ -139,7 +247,7 @@ public class RadioTest {
 
     @Test
     public void shouldSetMaxStation() {       // тест максимальной радиостанции
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setMaxStation();
 
         int expected = 9;
@@ -150,32 +258,32 @@ public class RadioTest {
 
     @Test
     public void shouldSetMinStation() {       // тест минимальной радиостанции
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setMinStation();
 
         int expected = 0;
-        int actual = radio.getMinStation();
+        int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetHiMaxStation() {     // тест ввода значения радиостанции выше max значения
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentStation(10);
 
-        int expected = 9;
-        int actual = radio.getMaxStation();
+        int expected = 0;
+        int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetLowMinStation() {     // тест ввода значения радиостанции ниже min значения
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentStation(-1);
 
-        int expected = 9;
+        int expected = 0;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
@@ -183,7 +291,7 @@ public class RadioTest {
 
     @Test
     public void shouldReduceStation() {       // тест переключения радиостанции (уменьшение на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentStation(0);
 
         radio.reduceStation();
@@ -196,7 +304,7 @@ public class RadioTest {
 
     @Test
     public void shouldReduceStation2() {       // тест переключения радиостанции (уменьшение на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentStation(9);
 
         radio.reduceStation();
@@ -209,7 +317,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaceStation() {      // тест переключения радиостанции (увеличение на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentStation(9);
 
         radio.increaceStation();
@@ -222,7 +330,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaceStation2() {     // тест переключения радиостанции (увеличение на единицу)
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentStation(0);
 
         radio.increaceStation();
