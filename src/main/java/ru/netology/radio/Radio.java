@@ -4,6 +4,19 @@ public class Radio {
     // НАСТРОЙКА ЗВУКА!!!
 
     private int currentVolume;          // текущий показатель громкости
+    private int currentStation;          // текущая радиостанция
+    private int maxStation;
+
+    public Radio() {
+        this.maxStation = 9;
+
+    }
+
+    public Radio(int stationCount) {
+        this.maxStation = stationCount - 1;
+
+    }
+
 
     public int getCurrentVolume() {    // запрос текущей громкости
 
@@ -45,28 +58,43 @@ public class Radio {
 
     // НАСТРОЙКА РАДИОСТАНЦИЙ!!!
 
-    private int currentStation;          // текущая радиостанция
+
+    public void next() {
+        if (currentStation != maxStation) {
+            currentStation++;
+        } else {
+            currentStation = 0;
+        }
+    }
+
+    public void prev() {
+        if (currentStation != 0) {
+            currentStation--;
+        } else {
+            currentStation = maxStation;
+        }
+    }
 
     public int getCurrentStation() {    // запрос текущей радиостанции
         return currentStation;
     }
 
     public void setMaxStation() {       // максимальная радиостанция (значение)
-        currentStation = 9;
+        currentStation = maxStation;
     }
 
     public void setMinStation() {       // минимальная радиостанция (значение)
         currentStation = 0;
     }
 
-    public void setCurrentStation(int newCurrentStation) {   // настройка условий (значений)
-        if (newCurrentStation > 9) {
+    public void setCurrentStation(int currentStation) {   // настройка условий (значений)
+        if (currentStation > maxStation) {
             return;
         }
-        if (newCurrentStation < 0) {
+        if (currentStation < 0) {
             return;
         }
-        currentStation = newCurrentStation;
+        this.currentStation = currentStation;
     }
 
     public void reduceStation() {        // переключения радиостанции (уменьшение на единицу)
@@ -78,7 +106,7 @@ public class Radio {
     }
 
     public void increaceStation() {       // переключения радиостанции (увеличение на единицу)
-        if (currentStation < 9) {
+        if (currentStation < maxStation) {
             currentStation = currentStation + 1;
         } else {
             setMinStation();
